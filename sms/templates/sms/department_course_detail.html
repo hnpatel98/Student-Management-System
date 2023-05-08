@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load django_tables2 %}
+{% block content %}
+    <section class="section">
+        <div class="row">
+            <div class="col-8 offset-2">
+                <nav>
+                    <ol class="breadcrumb">
+                        {% if request.user.userprofile.user_type == 'teacher' or request.user.is_superuser %}
+                            <li class="breadcrumb-item"><a href="{% url 'studentList' %}">Student List</a></li>
+                        {% else %}
+                            <li class="breadcrumb-item"><a href="{% url 'courseList' %}">Course List</a></li>
+                        {% endif %}
+                        <li class="breadcrumb-item active">Course Details</li>
+                    </ol>
+                </nav>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Department Details</h5>
+                        <p><b>Department Name: {{ object.name }} ({{ object.code }})</b></p>
+                        <p>{{ object.description }}</p>
+                    </div>
+                </div>
+                {% for course in department.subject_set.all %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ course.name }} ({{ course.code }})</h5>
+                            <p><b>Course Credit: {{ course.credit }}</b></p>
+                            <p>{{ course.description }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

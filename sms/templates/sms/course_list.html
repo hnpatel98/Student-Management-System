@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load django_tables2 %}
+{% block content %}
+    <section class="section">
+        <div class="row">
+            <div class="col-8 offset-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Your Course List
+                            <div class="float-end">
+                                <a href="{% url 'departmentCoursesDetail' request.user.userprofile.studentdepartmentmapper.department.id %}"
+                                   class="btn btn-primary">View Details</a>
+                            </div>
+                        </h5>
+                        {% render_table table %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

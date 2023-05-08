@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block custom-plugins-styles %}
+    {{ form.media.css }}
+    {{ doc_formset.media.css }}
+    {{ files.media.css }}
+{% endblock %}
+{% block content %}
+    <section class="section">
+        <div class="row">
+            <div class="col-8 offset-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Student Create</h5>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="row mb-3">{{ form.user_define_id | as_crispy_field }}</div>
+                            <div class="row mb-3">{{ form.department | as_crispy_field }}</div>
+                            <div class="row mb-3">{{ form.first_name | as_crispy_field }}</div>
+                            <div class="row mb-3">{{ form.last_name | as_crispy_field }}</div>
+                            <div class="row mb-3">{{ form.email | as_crispy_field }}</div>
+                            <div class="row mb-3">{{ form.gender | as_crispy_field }}</div>
+                            <div class="row mb-3">{{ form.address | as_crispy_field }}</div>
+                            <div class="row mb-3">{{ form.contact_no | as_crispy_field }}</div>
+                            <button type="submit" class="btn btn-success" value="Submit">
+                                <span class="oi oi-check"></span>
+                                Save
+                            </button>
+                            <a type="submit" class="btn btn-secondary"
+                               href="{{ request.META.HTTP_REFERER }}">
+                                <span class="oi oi-x"></span>
+                                Cancel
+                            </a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block custom-plugins-js %}
+    {{ form.media.js }}
+{% endblock %}
